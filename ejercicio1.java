@@ -38,7 +38,7 @@ public class ejercicio1 {
      }
 
     if (mostrarMenu) { 
-        System.out.print(opciones.length);
+ 
         System.out.println("\nOpciones de lavados disponibles: ");
         for (int i = 0; i < opciones.length; i++) { 
             System.out.printf("%d. %s%n", i+1, opciones[i]);

@@ -1,10 +1,17 @@
-public class ejercicio1 {
+public class autolavado {
 
      public double descuento1 =0; 
      public double descuento2 = 0;
      public double subtotal=0;
-     public double totalFinal;
+     public double totalFinalporAuto;
      public int precioLavado;
+     public double litrosConsumidos;
+     public int autos;
+     public double tiempoTrabajado;
+     public double [] litrosPorServicio = {80,120,150};
+     public double [] litrosPorAdicional = {5,10,0};
+     public double [] trabajoPorServicio = {15,25,40};
+     public double [] trabajoPorAdicional = {10,30,15};
      public String [] opciones = {
             "Lavado basico" ,
             "Lavado premium",
@@ -60,15 +67,31 @@ public class ejercicio1 {
             this.descuento2= subtotal * 0.05;
           }
 
-          this.totalFinal = subtotal - descuento2;
+          this.totalFinalporAuto = subtotal - descuento2;
 }
+
+   public void calcularConsumoyTiempo () {
+
+
+
+
+
+   }
+
+  
     public static void main(String[] args) {
         /**
        */
-        
+        autolavado e = new autolavado();
         java.util.Scanner sc = new java.util.Scanner(System.in);
         boolean mostrarMenu = false;
 
+        boolean siguiente = true;
+       System.out.println("Ingresa la cantidad de autos para este turno");
+       e.autos = Integer.parseInt(sc.nextLine().trim());
+       for (int y=0; y<e.autos;y++) {
+
+        while (siguiente) {
          for (int intento = 1; intento <= 3; intento++) {
          System.out.println(("¿Deseas ver nuestro menú de opciones? (S/N): "));
 
@@ -87,16 +110,14 @@ public class ejercicio1 {
         System.out.println("La opción ingresada es inválida");
         if (intento == 3) {
           System.out.println("Demasiados intentos. Inténtalo más tarde");
-            sc.close();
+           siguiente = false;
+           sc.close();
             return;
           }
        }
      }
 
     if (mostrarMenu) { 
-
-      ejercicio1 e = new ejercicio1();
- 
         System.out.println("\nOpciones de lavados disponibles: ");
         for (int i = 0; i < e.opciones.length; i++) { 
             System.out.printf("%d. %s%n", i+1, e.opciones[i]);
@@ -137,23 +158,11 @@ public class ejercicio1 {
           System.out.printf("Subtotal: %.2f Bs%n",(double)e.precioLavado+totalAdicionales);  
           System.out.printf("Descuento por lavado completo: %.2f Bs%n", e.descuento1);
           System.out.printf("Descuento por subtotal mayor a 250 Bs: %.2f Bs%n", e.descuento2);
-          System.out.printf("Total a pagar: %.2f Bs%n", e.totalFinal);
+          System.out.printf("Total a pagar: %.2f Bs%n", e.totalFinalporAuto);
         };
-    
+      }
+      }
         }
       }
 
-      
-
-      
-
-   
-
-
-
-
-  
-
-
-
-     
+    

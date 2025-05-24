@@ -1,7 +1,27 @@
 public class ejercicio1 {
-    
+
+     public double descuento1 =0; 
+     public double descuento2 = 0;
+     public double subtotal=0;
+     public double totalFinal;
+     public int precioLavado;
+     public String [] opciones = {
+            "Lavado basico" ,
+            "Lavado premium",
+            "Lavado completo" 
+        };
+     public String[] serviciosAdicionales = {
+            "Encerado especial",
+            "Limpieza de tapiceria",
+            "Pulitura de faros"
+        };
+
+      public int []precioServiciosAdicionales = {50,95,55};
+      
+      public boolean[] adicionalesSeleccionados = new boolean[3]; //{ false,false,false}
 
   public int calcularPrecioLavado(int opcion) {
+   
     int precio = 0;
     switch (opcion) {
         case 1:
@@ -20,30 +40,32 @@ public class ejercicio1 {
     return precio;
 }
 
+ public void calcularDescuentos(int lavadoSeleccionado, boolean[] adicionalesSeleccionados, int totalAdicionales) {
+    if (lavadoSeleccionado==3)
+          {
+            for (boolean sel : adicionalesSeleccionados)
+            {
+              if (sel)
+              {
+          
+                this.descuento1=( this.precioLavado+totalAdicionales )* 0.10;
+                break; 
+              }
+            }
+          }
+          subtotal = (this.precioLavado + totalAdicionales) - descuento1 ;
 
+          if (subtotal>250)
+          {
+            this.descuento2= subtotal * 0.05;
+          }
 
+          this.totalFinal = subtotal - descuento2;
+}
     public static void main(String[] args) {
         /**
-     
        */
-       double descuento1 =0;
-       double descuento2 = 0;
-       double subtotal=0;
-       double totalFinal;
-        String [] opciones = {
-            "Lavado basico" ,
-            "Lavado premium",
-            "Lavado completo" 
-        };
-        String[] serviciosAdicionales = {
-            "Encerado especial",
-            "Limpieza de tapiceria",
-            "Pulitura de faros"
-        };
-
-        int []precioServiciosAdicionales = {50,95,55};
-
-        boolean[] adicionalesSeleccionados = new boolean[3]; 
+        
         java.util.Scanner sc = new java.util.Scanner(System.in);
         boolean mostrarMenu = false;
 
@@ -76,8 +98,8 @@ public class ejercicio1 {
       ejercicio1 e = new ejercicio1();
  
         System.out.println("\nOpciones de lavados disponibles: ");
-        for (int i = 0; i < opciones.length; i++) { 
-            System.out.printf("%d. %s%n", i+1, opciones[i]);
+        for (int i = 0; i < e.opciones.length; i++) { 
+            System.out.printf("%d. %s%n", i+1, e.opciones[i]);
         }
        
         System. out.print("Por favor elige una opción entre 1-3): ");
@@ -91,84 +113,34 @@ public class ejercicio1 {
             return;
         }
 
-        int precioLavado = e.calcularPrecioLavado(lavado);
+        e.precioLavado = e.calcularPrecioLavado(lavado);
         int totalAdicionales = 0;
         System.out.println("\nDesea agregar un serivio adicional?(S/N) ");
 
-        for (int i = 0; i < serviciosAdicionales.length; i++) {
-            System.out.printf("%d. %s (Precio: %d)%n", i+1, serviciosAdicionales[i], precioServiciosAdicionales[i]);
+        for (int i = 0; i < e.serviciosAdicionales.length; i++) {
+            System.out.printf("%d. %s (Precio: %d)%n", i+1, e.serviciosAdicionales[i], e.precioServiciosAdicionales[i]);
             String respuesta = sc.nextLine().trim().toUpperCase();  
 
             if (respuesta.equals("S")) {
-                adicionalesSeleccionados[i] = true;
-                totalAdicionales += precioServiciosAdicionales[i];}
+                e.adicionalesSeleccionados[i] = true;
+                totalAdicionales += e.precioServiciosAdicionales[i];}
             }
-        
-          if (lavado==3)
-          {
-            for (boolean sel : adicionalesSeleccionados)
-            {
-              if (sel)
-              {
-
-                descuento1=( precioLavado+totalAdicionales )* 0.10;
-                break; 
-              }
-
-
-            }
-
-          }
-          subtotal = (precioLavado + totalAdicionales) - descuento1 ;
-
-
-          if (subtotal>250)
-          {
-            descuento2= subtotal * 0.05;
-          }
-
-          totalFinal = subtotal - descuento2;
-
+        e.calcularDescuentos(lavado, e.adicionalesSeleccionados, totalAdicionales);
           System.out.println("\nResumen de tu pedido:");
-          System.out.println("Servicio base: " + opciones[lavado - 1] + " (Precio: " + precioLavado + ")");
+          System.out.println("Servicio base: " + e.opciones[lavado - 1] + " (Precio: " + e.precioLavado + ")");
 
-          for (int i = 0; i < serviciosAdicionales.length; i++) {
-            if (adicionalesSeleccionados[i]) {
-                System.out.printf("Servicio adicional: %s (Precio: %d)%n", serviciosAdicionales[i], precioServiciosAdicionales[i]);
+          for (int i = 0; i < e.serviciosAdicionales.length; i++) {
+            if (e.adicionalesSeleccionados[i]) {
+                System.out.printf("Servicio adicional: %s (Precio: %d)%n", e.serviciosAdicionales[i], e.precioServiciosAdicionales[i]);
             }
-
-      
           }
-
-          System.out.printf("Subtotal: %.2f Bs%n",(double)precioLavado+totalAdicionales);  
-          System.out.printf("Descuento por lavado completo: %.2f Bs%n", descuento1);
-          System.out.printf("Descuento por subtotal mayor a 250 Bs: %.2f Bs%n", descuento2);
-          System.out.printf("Total a pagar: %.2f Bs%n", totalFinal);
-
-
-        
-            
+          System.out.printf("Subtotal: %.2f Bs%n",(double)e.precioLavado+totalAdicionales);  
+          System.out.printf("Descuento por lavado completo: %.2f Bs%n", e.descuento1);
+          System.out.printf("Descuento por subtotal mayor a 250 Bs: %.2f Bs%n", e.descuento2);
+          System.out.printf("Total a pagar: %.2f Bs%n", e.totalFinal);
         };
     
-
-
-
-
-
-      
-
-
-
-
-
         }
-
-      
-
-  
-
-
-
       }
 
       

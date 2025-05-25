@@ -5,13 +5,6 @@ public class autolavado {
      public double subtotal=0;
      public double totalFinalporAuto;
      public int precioLavado;
-     public double litrosConsumidos;
-     public int autos;
-     public double tiempoTrabajado;
-     public double [] litrosPorServicio = {80,120,150};
-     public double [] litrosPorAdicional = {5,10,0};
-     public double [] trabajoPorServicio = {15,25,40};
-     public double [] trabajoPorAdicional = {10,30,15};
      public String [] opciones = {
             "Lavado basico" ,
             "Lavado premium",
@@ -68,17 +61,8 @@ public class autolavado {
           }
 
           this.totalFinalporAuto = subtotal - descuento2;
-}
-
-   public void calcularConsumoyTiempo () {
-
-
-
-
-
    }
 
-  
     public static void main(String[] args) {
         /**
        */
@@ -87,10 +71,7 @@ public class autolavado {
         boolean mostrarMenu = false;
 
         boolean siguiente = true;
-       System.out.println("Ingresa la cantidad de autos para este turno");
-       e.autos = Integer.parseInt(sc.nextLine().trim());
-       for (int y=0; y<e.autos;y++) {
-
+        { 
         while (siguiente) {
          for (int intento = 1; intento <= 3; intento++) {
          System.out.println(("¿Deseas ver nuestro menú de opciones? (S/N): "));
